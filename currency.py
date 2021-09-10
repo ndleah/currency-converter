@@ -15,7 +15,17 @@ def check_valid_currency(currency: str) -> bool:
 
     Pseudo-code
     ----------
-    # => To be filled by student
+    SET CURRENCIES TO get_currencies()
+    LIST CURRENCIES
+    
+    # define the function: 
+    FUNCTION check_valid_currency(currency)
+    BEGIN FUNCTION
+        IF currency included in CURRENCIES list THEN
+            RETURN True
+        ELSE
+            RETURN False
+    END FUNCTION
 
     Returns
     -------
@@ -23,10 +33,10 @@ def check_valid_currency(currency: str) -> bool:
         True if the currency code is valid otherwise False
     """
 
-    # => To be filled by student
-
-    return None
-
+    if currency in CURRENCIES:
+        return True
+    else:
+        return False
 
 @dataclass
 class Currency:
@@ -56,6 +66,7 @@ class Currency:
     date: str = None
 
     def reverse_rate(self):
+        
         """
         Method that will calculate the inverse rate, round it to 5 decimal places and save it in the attribute inverse_rate
 
@@ -67,9 +78,10 @@ class Currency:
         -------
         None
         """
-        # => To be filled by student
 
-    def format_result(self):
+        self.inverse_rate = round(1/self.rate, 5)
+
+    def format_result(self): 
         """
         Methods returning the formatted successful message
 
@@ -82,9 +94,7 @@ class Currency:
         str
             Formatted successful message
         """
-        # => To be filled by student
-
-        return None
+        return "Today's " + "(" + self.date + ")" + " conversion rate from " + self.from_currency + " to AUD is " + str(self.rate) + ". The inverse rate is " + str(self.inverse_rate)
 
 
 def extract_api_result(result: dict) -> Currency:
@@ -99,13 +109,32 @@ def extract_api_result(result: dict) -> Currency:
 
     Pseudo-code
     ----------
-    # => To be filled by student
-
+    # define the function: 
+    FUNCTION check_valid_currency(currency)
+    BEGIN FUNCTION
+        SET variable_1 TO get the code for the origin currency
+        SET variable_2 TO get the code for the destination currency
+        SET variable_3 TO get the amount to be converted
+        SET variable_4 TO get the the conversion rate
+        SET variable_5 TO get the date when the conversion rate was recorded
+        
+        CREATE currency object TO call the Currency class with above objects as parameters
+        CALL the reverse_rate() of currency object TO get the inverse rate
+        RETURN currency object
+    END FUNCTION
+    
     Returns
     -------
     Currency
         Instantiated Currency
     """
-    # => To be filled by student
+    from_currency = result.get("base")
+    to_currency = list(result.get("rates").keys())[0]
+    amount = result.get("amount")
+    rate = result.get("rates").get(to_currency)
+    date = result.get("date")
+    
+    currency = Currency(from_currency, to_currency, amount, rate, None, date)
+    currency.reverse_rate()
 
-    return None
+    return currency
