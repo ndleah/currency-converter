@@ -4,7 +4,7 @@
 [![View Repositories](https://img.shields.io/badge/View-My_Repositories-blue?logo=GitHub)](https://github.com/ndleah?tab=repositories)
 
 
-# Currency Converter
+# Currency Converter <img src="/img/currency.jpg" align="right" width="120" />
 
 <p align="center">
   <img src="https://forthebadge.com/images/badges/built-with-love.svg">
